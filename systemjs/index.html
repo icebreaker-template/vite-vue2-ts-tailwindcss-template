@@ -8,7 +8,6 @@
   <script type="importmap">
     {
       "imports": {
-        "d3": "https://esm.run/d3",
         "vue": "https://esm.run/vue"
       }
     }
@@ -25,10 +24,12 @@
     console.log($('#app').text('xxx'))
 
   </script>
+  <link rel="stylesheet" href="./index.css" />
   <script type="module">
-    import * as d3 from 'd3'
+    // import * as d3 from 'd3'
     import * as Vue from 'vue'
-    console.log(d3,Vue)
+    // import './index.css'
+    console.log(Vue)
   </script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
 </head>
