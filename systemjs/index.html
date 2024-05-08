@@ -5,6 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "d3": "https://esm.run/d3",
+        "vue": "https://esm.run/vue"
+      }
+    }
+  </script>
   <script type="module">
     import $ from 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm'
     console.log('module loaded')
@@ -12,10 +20,15 @@
     console.log($('#app').text('pppp'))
 
   </script>
-   <script type="module">
+  <script type="module">
     import $ from 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm'
     console.log($('#app').text('xxx'))
 
+  </script>
+  <script type="module">
+    import * as d3 from 'd3'
+    import * as Vue from 'vue'
+    console.log(d3,Vue)
   </script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
 </head>
