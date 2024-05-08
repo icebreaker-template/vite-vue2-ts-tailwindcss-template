@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="module">
+    import $ from 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm'
+    console.log('module loaded')
+
+    console.log($('#app').text('pppp'))
+
+  </script>
+   <script type="module">
+    import $ from 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm'
+    console.log($('#app').text('xxx'))
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
+</head>
+
+<body>
+  <div id="app">hello world!</div>
+
+  <script nomodule>
+    console.log('module nomodule')
+  </script>
+</body>
+
+</html>
