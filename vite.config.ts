@@ -78,5 +78,8 @@ function ppp(): Plugin[] {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), legacy(), Inspect(), ppp()]
+  plugins: [vue(), legacy(), Inspect()],
+  resolve: {
+    extensions: ['.vue']
+  }
 })
