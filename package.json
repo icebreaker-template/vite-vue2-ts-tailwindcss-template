@@ -9,17 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.1.7",
     "vue": "^2.7.16"
   },
   "devDependencies": {
+    "@icebreakers/eslint-config": "^0.3.5",
     "@vitejs/plugin-vue2": "^2.3.1",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.4.0",
     "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "sass": "^1.74.1",
+    "sass": "^1.77.4",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12",
+    "vue-router": "3",
+    "vue-tsc": "^2.0.19"
   }
 }
