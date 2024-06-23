@@ -40,8 +40,8 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4
       tailwindcss-patch:
-        specifier: ^3.0.1
-        version: 3.0.1(tailwindcss@3.4.4)
+        specifier: ^3.0.2
+        version: 3.0.2(tailwindcss@3.4.4)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -567,17 +567,11 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@tailwindcss-mangle/config@2.2.2':
-    resolution: {integrity: sha512-r3Y7W1jpsDLKNVnij7aRL7cwBetTfLlgeu1AE2jeJXf0m8aiHuajy1e5JAjXdO1qvz3VzkFywUbkgP+cmtiFng==}
-
   '@tailwindcss-mangle/config@3.0.0':
     resolution: {integrity: sha512-/aXmBCMsRT55t8PvhFUW0LQimSCUzgSjDPe10X696ov6vhQrCv3Z2E2+arCyKQGAQznW8rBu9nL4ybWCa7ymxQ==}
 
   '@tailwindcss-mangle/core@3.0.0':
     resolution: {integrity: sha512-ZjwaPHQKNKmD3B/+86sWwLCcIvFTLJCRRsuZEPGZbf5Rg86sKYSHCSrxo/qxsrM4opMZXjiMUBBF+qPcwK990Q==}
-
-  '@tailwindcss-mangle/shared@2.2.2':
-    resolution: {integrity: sha512-uUY8MD+iSS0afBclCV3C/tmot5DZdug6rTtao1Vp48zdUu4A/yw9Ji7CEmKq+bYjgtacLLxXnaOGDEbzEM50cA==}
 
   '@tailwindcss-mangle/shared@3.0.0':
     resolution: {integrity: sha512-h1ateiRm/o0JvRsD5755dyS4H1RPE5sgeyEAOorLGVkGvNawkACtM+0MsiD/ZFNgrfQ7aYDD+DF/dV/8LN5Lmw==}
@@ -1000,14 +994,6 @@ packages:
 
   decode-named-character-reference@1.0.2:
     resolution: {integrity: sha512-O8x12RzrUF8xyVcY0KJowWsmaJxQbmy0/EtnNtHRpsOcT7dFk5W598coHqBVpmWo1oQQfsCqfCmkZN5DJrZVdg==}
-
-  dedent@1.5.3:
-    resolution: {integrity: sha512-NHQtfOOW68WD8lgypbLA5oT+Bt0xXJhiYvoR6SmmNXZfpzOGXwdKWmcwG8N7PwVVWV3eF/68nmD9BaJSsTBhyQ==}
-    peerDependencies:
-      babel-plugin-macros: ^3.1.0
-    peerDependenciesMeta:
-      babel-plugin-macros:
-        optional: true
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
@@ -2395,8 +2381,8 @@ packages:
     resolution: {integrity: sha512-7RnqIMq572L8PeEzKeBINYEJDDxpcH8JEgLwUqBd3TkofhFRbkq4QLR0u+36avGAhCRbk2nnmjcW9SE531hPDg==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tailwindcss-patch@3.0.1:
-    resolution: {integrity: sha512-/MrcTuc5BHk7EC884LGPi4jDkWIjyqnJboY5JhOHzvquZ3r7PgL++5sP5FjcUUiPazg8Kx9z4A0Q+Zo3fGLflw==}
+  tailwindcss-patch@3.0.2:
+    resolution: {integrity: sha512-3JW7xT3x3h6tRTtyqfrZvWWFwltV/YDh9YbVU9v7J/JZsIts5FB4nu7JBOk/y/o/X3IUF9fHllsOATpU8k72bQ==}
     hasBin: true
     peerDependencies:
       tailwindcss: '>=3.0.0'
@@ -3183,15 +3169,6 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tailwindcss-mangle/config@2.2.2':
-    dependencies:
-      '@tailwindcss-mangle/shared': 2.2.2
-      c12: 1.11.1
-      dedent: 1.5.3
-    transitivePeerDependencies:
-      - babel-plugin-macros
-      - magicast
-
   '@tailwindcss-mangle/config@3.0.0':
     dependencies:
       '@tailwindcss-mangle/shared': 3.0.0
@@ -3216,8 +3193,6 @@ snapshots:
     transitivePeerDependencies:
       - magicast
       - supports-color
-
-  '@tailwindcss-mangle/shared@2.2.2': {}
 
   '@tailwindcss-mangle/shared@3.0.0': {}
 
@@ -3662,8 +3637,6 @@ snapshots:
   decode-named-character-reference@1.0.2:
     dependencies:
       character-entities: 2.0.2
-
-  dedent@1.5.3: {}
 
   deep-is@0.1.4: {}
 
@@ -5317,13 +5290,13 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.6.3
 
-  tailwindcss-patch@3.0.1(tailwindcss@3.4.4):
+  tailwindcss-patch@3.0.2(tailwindcss@3.4.4):
     dependencies:
       '@babel/generator': 7.24.7
       '@babel/parser': 7.24.7
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
-      '@tailwindcss-mangle/config': 2.2.2
+      '@tailwindcss-mangle/config': 3.0.0
       cac: 6.7.14
       jiti: 1.21.6
       lilconfig: 3.1.2
@@ -5333,7 +5306,6 @@ snapshots:
     optionalDependencies:
       tailwindcss: 3.4.4
     transitivePeerDependencies:
-      - babel-plugin-macros
       - magicast
       - supports-color
 
