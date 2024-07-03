@@ -10,10 +10,10 @@ const store = useStore()
     <h1>{{ msg }}</h1>
 
     <div>
-      <button type="button" @click="store.increment()">
+      <button class="bg-pink-100" type="button" @click="store.increment()">
         count is {{ store.count }}
       </button>
-      <p>
+      <p class="text-yellow-800">
         Double count {{ store.double }}
       </p>
     </div>
