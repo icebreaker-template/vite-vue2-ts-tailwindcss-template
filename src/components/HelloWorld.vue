@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useStore } from '../store'
+import tailwindcssIcon from '../assets/tailwindcss.svg'
+import './HelloWorld.css'
 
 defineProps<{ msg: string }>()
 const store = useStore()
@@ -8,7 +10,7 @@ const store = useStore()
 <template>
   <div class="space-y-2 text-center">
     <h1>{{ msg }}</h1>
-
+    <img class="w-8" :src="tailwindcssIcon">
     <div>
       <button class="bg-pink-100" type="button" @click="store.increment()">
         count is {{ store.count }}
