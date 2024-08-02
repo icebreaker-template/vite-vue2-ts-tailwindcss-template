@@ -11,7 +11,7 @@
   "dependencies": {
     "pinia": "^2.2.0",
     "vue": "^2.7.16",
-    "vue-router": "3"
+    "vue-router": "4"
   },
   "devDependencies": {
     "@icebreakers/eslint-config": "^0.3.17",

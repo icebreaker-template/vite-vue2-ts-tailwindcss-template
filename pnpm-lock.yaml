@@ -15,8 +15,8 @@ importers:
         specifier: ^2.7.16
         version: 2.7.16
       vue-router:
-        specifier: '3'
-        version: 3.6.5(vue@2.7.16)
+        specifier: '4'
+        version: 4.4.2(vue@2.7.16)
     devDependencies:
       '@icebreakers/eslint-config':
         specifier: ^0.3.17
@@ -2860,10 +2860,10 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-router@3.6.5:
-    resolution: {integrity: sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==}
+  vue-router@4.4.2:
+    resolution: {integrity: sha512-1qNybkn2L7QsLzaXs8nvlQmRKp8XF8DCxZys/Jr1JpQcHsKUxTKzTxCVA1G7NfBfwRIBgCJPoujOG5lHCCNUxw==}
     peerDependencies:
-      vue: ^2
+      vue: ^3.2.0
 
   vue-tsc@2.0.29:
     resolution: {integrity: sha512-MHhsfyxO3mYShZCGYNziSbc63x7cQ5g9kvijV7dRe1TTXBRLxXyL0FnXWpUF1xII2mJ86mwYpYsUmMwkmerq7Q==}
@@ -6312,8 +6312,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-router@3.6.5(vue@2.7.16):
+  vue-router@4.4.2(vue@2.7.16):
     dependencies:
+      '@vue/devtools-api': 6.6.3
       vue: 2.7.16
 
   vue-tsc@2.0.29(typescript@5.5.4):
