@@ -63,7 +63,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .fly-item,
 .fly-item>div {
   position: absolute;
