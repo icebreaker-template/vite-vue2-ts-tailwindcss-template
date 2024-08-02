@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useStore } from '../store'
 import tailwindcssIcon from '../assets/tailwindcss.svg'
-import './HelloWorld.css'
 
 defineProps<{ msg: string }>()
 const store = useStore()
@@ -22,4 +21,4 @@ const store = useStore()
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss"></style>
