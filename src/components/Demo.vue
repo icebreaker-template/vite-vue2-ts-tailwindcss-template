@@ -41,8 +41,15 @@ function fly() {
 }
 
 onMounted(() => {
-
+  setInterval(() => {
+    fly()
+  }, 1000)
 })
+
+function createFlyItem() {
+  const flyItemWrapper = document.createElement('div')
+  flyItemWrapper.classList.add('fly-item')
+}
 </script>
 
 <template>
