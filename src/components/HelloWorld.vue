@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
 import tailwindcssIcon from '../assets/tailwindcss.svg'
 
 defineProps<{ msg: string }>()
-
 </script>
 
 <template>
