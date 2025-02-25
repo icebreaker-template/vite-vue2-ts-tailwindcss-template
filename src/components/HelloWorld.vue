@@ -5,11 +5,11 @@ import { vSticky } from '../directives/sticky'
 
 const stickyOptions = ref<StickyOptions>(
   {
-    // enabled: true,
-    // topOffset: 0,
-    // bottomOffset: 0,
+    enabled: true,
+    topOffset: 0,
+    bottomOffset: 0,
     side: 'both',
-    // zIndex: 20,
+    zIndex: 20,
     onStick(state) {
       console.log(state)
     },
@@ -33,7 +33,7 @@ const stickyOptions = ref<StickyOptions>(
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
-          <div v-sticky="stickyOptions" class="sticky">
+          <div v-sticky class="sticky">
             <h2>
               <span>{{ stickyOptions.enabled ? 'Sticky' : 'Not sticky' }}</span>
               <button class="toggle-sticky" @click="stickyOptions.enabled = !stickyOptions.enabled">
