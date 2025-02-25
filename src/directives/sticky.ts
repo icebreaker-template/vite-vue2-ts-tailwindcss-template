@@ -1,7 +1,6 @@
 import type { ObjectDirective } from 'vue'
-import Vue from 'vue'
+import type Vue from 'vue'
 
-const namespace = '@@vue-sticky-directive'
 const events = [
   'resize',
   'scroll',
@@ -12,11 +11,12 @@ const events = [
   'load',
 ]
 
-function batchStyle(el, style = {}, className = {}) {
-  for (let k in style) {
+function batchStyle(el: HTMLElement, style: Record<string, any> = {}, className: Record<string, any> = {}) {
+  for (const k in style) {
+    // @ts-ignore
     el.style[k] = style[k]
   }
-  for (let k in className) {
+  for (const k in className) {
     if (className[k] && !el.classList.contains(k)) {
       el.classList.add(k)
     }
@@ -27,7 +27,17 @@ function batchStyle(el, style = {}, className = {}) {
 }
 
 class Sticky {
-  constructor(el, vm) {
+  el: HTMLElement
+  vm: Vue
+  unsubscribers: Array<() => void>
+  isPending: boolean
+  state: Record<string, any>
+  lastState: Record<string, any>
+  options: Record<string, any>
+  placeholderEl!: HTMLElement
+  containerEl!: HTMLElement
+
+  constructor(el: HTMLElement, vm: Vue, options: StickyOptions) {
     this.el = el
     this.vm = vm
     this.unsubscribers = []
@@ -46,10 +56,13 @@ class Sticky {
       sticked: false,
     }
 
-    const offset = this.getAttribute('sticky-offset') || {}
-    const side = this.getAttribute('sticky-side') || 'top'
-    const zIndex = this.getAttribute('sticky-z-index') || '10'
-    const onStick = this.getAttribute('on-stick') || null
+    const offset = {
+      top: options.topOffset ?? 0,
+      bottom: options.bottomOffset ?? 0,
+    }
+    const side = options.side || 'top'
+    const zIndex = options.zIndex || '10'
+    const onStick = options.onStick || null
 
     this.options = {
       topOffset: Number(offset.top) || 0,
@@ -222,8 +235,8 @@ class Sticky {
     }
   }
 
-  getContainerEl() {
-    let node = this.el.parentNode
+  getContainerEl(): HTMLElement {
+    let node = this.el.parentNode as HTMLElement
     while (
       node
       && node.tagName !== 'HTML'
@@ -231,11 +244,11 @@ class Sticky {
       && node.nodeType === 1
     ) {
       if (node.hasAttribute('data-sticky-container')) {
-        return node
+        return node as HTMLElement
       }
-      node = node.parentNode
+      node = node.parentNode as HTMLElement
     }
-    return this.el.parentNode
+    return this.el.parentNode as HTMLElement
   }
 
   getXOffset() {
@@ -257,25 +270,6 @@ class Sticky {
   getContainerElRect() {
     return this.containerEl.getBoundingClientRect()
   }
-
-  getAttribute(name) {
-    const expr = this.el.getAttribute(name)
-    let result
-    if (expr) {
-      if (this.vm[expr]) {
-        result = this.vm[expr]
-      }
-      else {
-        try {
-          result = eval(`(${expr})`)
-        }
-        catch (error) {
-          result = expr
-        }
-      }
-    }
-    return result
-  }
 }
 
 export interface StickyState {
@@ -285,37 +279,45 @@ export interface StickyState {
 }
 
 export interface StickyOptions {
-  topOffset: number
-  bottomOffset: number
-  zIndex: number
-  shouldTopSticky: boolean
-  shouldBottomSticky: boolean
-  onStick: (state: StickyState) => void
+  enabled?: boolean
+  topOffset?: number
+  bottomOffset?: number
+  side?: 'top' | 'bottom' | 'both'
+  zIndex?: number
+  onStick?: (state: StickyState) => void
 }
 
 const weakMap = new WeakMap<HTMLElement, Sticky>()
 
+export function getStickyInstance(el: HTMLElement) {
+  return weakMap.get(el)
+}
+
+export function setStickyInstance(el: HTMLElement, sticky: Sticky) {
+  weakMap.set(el, sticky)
+}
+
 export const vSticky: ObjectDirective<HTMLElement, StickyOptions> = {
   inserted(el, bind, vnode) {
-    if (typeof bind.value === 'undefined' || bind.value) {
-      const sticky = new Sticky(el, vnode.context)
-      sticky.doBind()
-      weakMap.set(el, sticky)
-    }
+    console.log(el, bind, vnode)
+    const sticky = new Sticky(el, vnode.context, bind.value)
+    sticky.doBind()
+    setStickyInstance(el, sticky)
   },
   unbind(el) {
-    const sticky = weakMap.get(el)
+    const sticky = getStickyInstance(el)
     if (sticky) {
       sticky.doUnbind()
       weakMap.delete(el)
     }
   },
   componentUpdated(el, bind, vnode) {
-    let sticky = weakMap.get(el)
-    if (typeof bind.value === 'undefined' || bind.value) {
+    // console.log(el, bind, vnode)
+    let sticky = getStickyInstance(el)
+    if (bind.value.enabled) {
       if (!sticky) {
-        sticky = new Sticky(el, vnode.context)
-        weakMap.set(el, sticky)
+        sticky = new Sticky(el, vnode.context, bind.value)
+        setStickyInstance(el, sticky)
       }
       sticky.doBind()
     }

@@ -1,12 +1,20 @@
 <script setup lang="ts">
+import type { StickyOptions } from '../directives/sticky'
 import { ref } from 'vue'
 import { vSticky } from '../directives/sticky'
 
-const stickyEnabled = ref(true)
-
-function onStick(data) {
-  console.log(data)
-}
+const stickyOptions = ref<StickyOptions>(
+  {
+    enabled: true,
+    topOffset: 90,
+    bottomOffset: 20,
+    side: 'both',
+    zIndex: 20,
+    onStick(state) {
+      console.log(state)
+    },
+  },
+)
 </script>
 
 <template>
@@ -25,10 +33,10 @@ function onStick(data) {
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
           <p>Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. Text before sticky element. </p>
-          <div v-sticky="stickyEnabled" class="sticky" sticky-offset="{top: 10, bottom: 30}" sticky-side="both" on-stick="onStick" sticky-z-index="20">
+          <div v-sticky="stickyOptions" class="sticky">
             <h2>
-              <span>{{ stickyEnabled ? 'Sticky' : 'Not sticky' }}</span>
-              <button class="toggle-sticky" @click="stickyEnabled = !stickyEnabled">
+              <span>{{ stickyOptions.enabled ? 'Sticky' : 'Not sticky' }}</span>
+              <button class="toggle-sticky" @click="stickyOptions.enabled = !stickyOptions.enabled">
                 toggle sticky
               </button>
             </h2>
