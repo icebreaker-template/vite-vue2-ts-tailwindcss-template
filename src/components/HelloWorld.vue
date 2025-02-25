@@ -5,11 +5,11 @@ import { vSticky } from '../directives/sticky'
 
 const stickyOptions = ref<StickyOptions>(
   {
-    enabled: true,
-    topOffset: 90,
-    bottomOffset: 20,
-    side: 'both',
-    zIndex: 20,
+    // enabled: true,
+    // topOffset: 0,
+    // bottomOffset: 0,
+    // side: 'both',
+    // zIndex: 20,
     onStick(state) {
       console.log(state)
     },

@@ -1,5 +1,5 @@
 import type { ObjectDirective } from 'vue'
-import type Vue from 'vue'
+import Vue from 'vue'
 
 const events = [
   'resize',
@@ -28,7 +28,6 @@ function batchStyle(el: HTMLElement, style: Record<string, any> = {}, className:
 
 class Sticky {
   el: HTMLElement
-  vm: Vue
   unsubscribers: Array<() => void>
   isPending: boolean
   state: Record<string, any>
@@ -37,9 +36,8 @@ class Sticky {
   placeholderEl!: HTMLElement
   containerEl!: HTMLElement
 
-  constructor(el: HTMLElement, vm: Vue, options: StickyOptions) {
+  constructor(el: HTMLElement, options: StickyOptions) {
     this.el = el
-    this.vm = vm
     this.unsubscribers = []
     this.isPending = false
     this.state = {
@@ -78,11 +76,11 @@ class Sticky {
     if (this.unsubscribers.length > 0) {
       return
     }
-    const { el, vm } = this
-    vm.$nextTick(() => {
+    const { el } = this
+    Vue.nextTick(() => {
       this.placeholderEl = document.createElement('div')
       this.containerEl = this.getContainerEl()
-      el.parentNode.insertBefore(this.placeholderEl, el)
+      el.parentNode?.insertBefore(this.placeholderEl, el)
       events.forEach((event) => {
         const fn = this.update.bind(this)
         this.unsubscribers.push(() => window.removeEventListener(event, fn))
@@ -113,7 +111,9 @@ class Sticky {
   }
 
   isTopSticky() {
-    if (!this.options.shouldTopSticky) { return false }
+    if (!this.options.shouldTopSticky) {
+      return false
+    }
     const fromTop = this.state.placeholderElRect.top
     const fromBottom = this.state.containerElRect.bottom
 
@@ -124,7 +124,9 @@ class Sticky {
   }
 
   isBottomSticky() {
-    if (!this.options.shouldBottomSticky) { return false }
+    if (!this.options.shouldBottomSticky) {
+      return false
+    }
     const fromBottom
       = window.innerHeight - this.state.placeholderElRect.top - this.state.height
     const fromTop = window.innerHeight - this.state.containerElRect.top
@@ -165,7 +167,7 @@ class Sticky {
   }
 
   updateElements() {
-    const placeholderStyle = { paddingTop: 0 }
+    const placeholderStyle: Record<string, number | string> = { paddingTop: 0 }
     const elStyle = {
       position: 'static',
       top: 'auto',
@@ -298,9 +300,8 @@ export function setStickyInstance(el: HTMLElement, sticky: Sticky) {
 }
 
 export const vSticky: ObjectDirective<HTMLElement, StickyOptions> = {
-  inserted(el, bind, vnode) {
-    console.log(el, bind, vnode)
-    const sticky = new Sticky(el, vnode.context, bind.value)
+  inserted(el, bind) {
+    const sticky = new Sticky(el, bind.value)
     sticky.doBind()
     setStickyInstance(el, sticky)
   },
@@ -311,12 +312,12 @@ export const vSticky: ObjectDirective<HTMLElement, StickyOptions> = {
       weakMap.delete(el)
     }
   },
-  componentUpdated(el, bind, vnode) {
+  componentUpdated(el, bind) {
     // console.log(el, bind, vnode)
     let sticky = getStickyInstance(el)
     if (bind.value.enabled) {
       if (!sticky) {
-        sticky = new Sticky(el, vnode.context, bind.value)
+        sticky = new Sticky(el, bind.value)
         setStickyInstance(el, sticky)
       }
       sticky.doBind()
