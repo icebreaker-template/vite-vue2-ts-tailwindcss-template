@@ -1,3 +1,6 @@
+import type { ObjectDirective } from 'vue'
+import Vue from 'vue'
+
 const namespace = '@@vue-sticky-directive'
 const events = [
   'resize',
@@ -275,29 +278,50 @@ class Sticky {
   }
 }
 
-export const vSticky = {
+export interface StickyState {
+  top: boolean
+  bottom: boolean
+  sticked: boolean
+}
+
+export interface StickyOptions {
+  topOffset: number
+  bottomOffset: number
+  zIndex: number
+  shouldTopSticky: boolean
+  shouldBottomSticky: boolean
+  onStick: (state: StickyState) => void
+}
+
+const weakMap = new WeakMap<HTMLElement, Sticky>()
+
+export const vSticky: ObjectDirective<HTMLElement, StickyOptions> = {
   inserted(el, bind, vnode) {
     if (typeof bind.value === 'undefined' || bind.value) {
-      el[namespace] = new Sticky(el, vnode.context)
-      el[namespace].doBind()
+      const sticky = new Sticky(el, vnode.context)
+      sticky.doBind()
+      weakMap.set(el, sticky)
     }
   },
-  unbind(el, bind, vnode) {
-    if (el[namespace]) {
-      el[namespace].doUnbind()
-      el[namespace] = undefined
+  unbind(el) {
+    const sticky = weakMap.get(el)
+    if (sticky) {
+      sticky.doUnbind()
+      weakMap.delete(el)
     }
   },
   componentUpdated(el, bind, vnode) {
+    let sticky = weakMap.get(el)
     if (typeof bind.value === 'undefined' || bind.value) {
-      if (!el[namespace]) {
-        el[namespace] = new Sticky(el, vnode.context)
+      if (!sticky) {
+        sticky = new Sticky(el, vnode.context)
+        weakMap.set(el, sticky)
       }
-      el[namespace].doBind()
+      sticky.doBind()
     }
     else {
-      if (el[namespace]) {
-        el[namespace].doUnbind()
+      if (sticky) {
+        sticky.doUnbind()
       }
     }
   },
