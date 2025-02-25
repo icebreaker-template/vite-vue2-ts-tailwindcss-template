@@ -8,7 +8,7 @@ const stickyOptions = ref<StickyOptions>(
     // enabled: true,
     // topOffset: 0,
     // bottomOffset: 0,
-    // side: 'both',
+    side: 'both',
     // zIndex: 20,
     onStick(state) {
       console.log(state)

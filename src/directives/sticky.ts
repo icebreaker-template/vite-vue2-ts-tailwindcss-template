@@ -138,11 +138,13 @@ class Sticky {
   }
 
   recomputeState() {
+    const placeholderElRect = this.getPlaceholderElRect()
+    const elRect = this.getElRect()
     this.state = Object.assign({}, this.state, {
-      height: this.getHeight(),
-      width: this.getWidth(),
-      xOffset: this.getXOffset(),
-      placeholderElRect: this.getPlaceholderElRect(),
+      height: elRect.height,
+      width: placeholderElRect.width,
+      xOffset: placeholderElRect.left,
+      placeholderElRect,
       containerElRect: this.getContainerElRect(),
     })
     this.state.isTopSticky = this.isTopSticky()
@@ -253,16 +255,8 @@ class Sticky {
     return this.el.parentNode as HTMLElement
   }
 
-  getXOffset() {
-    return this.placeholderEl.getBoundingClientRect().left
-  }
-
-  getWidth() {
-    return this.placeholderEl.getBoundingClientRect().width
-  }
-
-  getHeight() {
-    return this.el.getBoundingClientRect().height
+  getElRect() {
+    return this.el.getBoundingClientRect()
   }
 
   getPlaceholderElRect() {
