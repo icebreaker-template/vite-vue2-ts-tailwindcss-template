@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import type { RouteConfig } from 'vue-router'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
