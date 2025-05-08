@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import tailwindcssIcon from '../assets/tailwindcss.svg'
 
 defineProps<{ msg: string }>()
+
+onMounted(() => {
+  console.log('HelloWorld.vue mounted')
+})
 </script>
 
 <template>
