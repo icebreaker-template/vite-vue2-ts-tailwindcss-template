@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^2.7.16",
-    "vue-router": "3"
+    "vue-router": "4"
   },
   "devDependencies": {
     "@icebreakers/eslint-config": "^1.1.3",
