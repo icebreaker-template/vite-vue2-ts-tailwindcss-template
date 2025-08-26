@@ -22,5 +22,3 @@ onMounted(() => {
     <img class="w-8" :src="tailwindcssIcon">
   </div>
 </template>
-
-<style lang="scss"></style>
